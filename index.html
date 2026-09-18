@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hanlin (Harry) Shi</title>
+<meta name="description" content="Hanlin (Harry) Shi — MS student in Mechanical Engineering at Carnegie Mellon. Locomotion, estimation and control for snake robots and bio-inspired soft robots.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --paper:#FFFFFF; --card:#FFFFFF; --band:#EEF3F9; --band2:#F7FAFC;
+  --ink:#111721; --muted:#5A6472; --rule:#DCE3EC; --field:#EFF3F8;
+  --accent:#1B3A6B; --accent-lift:#2F5FA8; --accent-soft:#E2EAF6;
+}
+html{background:#FFFFFF}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Newsreader",Georgia,serif; font-size:18px; line-height:1.62;
+  -webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,nav,.eyebrow,.meta,.when,.btn,.tile-t,.stat,.links-row,footer,.tag,.brand,.subnav,.proj{
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif}
+a{color:inherit}
+img{max-width:100%; height:auto; display:block}
+p{margin:0 0 16px; max-width:34em}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
+
+/* ---------- top bar ---------- */
+.bar{position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 90%, transparent);
+  backdrop-filter:blur(10px); border-bottom:1px solid var(--rule)}
+.bar-in{max-width:1180px; margin:0 auto; padding:0 26px; height:62px;
+  display:flex; align-items:center; justify-content:space-between; gap:20px}
+.brand{font-weight:700; font-size:16.5px; letter-spacing:-.01em; text-decoration:none}
+.brand em{font-style:normal; color:var(--muted); font-weight:500}
+nav.tabs{display:flex; gap:2px; flex-wrap:wrap}
+nav.tabs a{font-size:14.5px; font-weight:500; color:var(--muted); text-decoration:none;
+  padding:7px 13px; border-radius:999px; transition:color .15s, background .15s}
+nav.tabs a:hover{color:var(--ink); background:var(--field)}
+nav.tabs a[aria-current="page"]{color:#fff; background:var(--accent)}
+
+.panel,.subpanel{display:none}
+.panel.is-active,.subpanel.is-active{display:block}
+.section{max-width:1180px; margin:0 auto; padding:0 26px}
+.pad{padding-top:72px}
+.pad-b{padding-bottom:72px}
+
+/* ---------- hero (light) ---------- */
+.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--rule);
+  background:linear-gradient(180deg, var(--band) 0%, var(--band2) 62%, var(--paper) 100%)}
+.hero-art{position:absolute; inset:0; opacity:.18}
+.hero-art svg{width:100%; height:100%; display:block}
+.helix-run{animation:run 30s linear infinite}
+@keyframes run{from{transform:translateX(0)} to{transform:translateX(-240px)}}
+.hero-in{position:relative; max-width:1180px; margin:0 auto; padding:110px 26px 66px;
+  display:grid; grid-template-columns:1.25fr .75fr; gap:56px; align-items:center}
+.eyebrow{font-size:13px; font-weight:600; letter-spacing:.02em; color:var(--accent); margin:0 0 88px}
+.hero h1{font-family:"Newsreader",serif; font-weight:300; font-size:clamp(32px,4.6vw,52px);
+  line-height:1.1; letter-spacing:-.02em; margin:0 0 56px; max-width:14em}
+.hero .sub{color:var(--muted); font-size:19px; max-width:32em; margin:0 0 28px}
+.cta{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+.ln{font-family:"Archivo",sans-serif; font-size:14.5px; font-weight:500; color:var(--muted);
+  text-decoration:none; border-bottom:1px solid var(--rule); padding-bottom:2px;
+  transition:color .15s, border-color .15s}
+.ln:hover{color:var(--accent); border-bottom-color:var(--accent)}
+.btn{display:inline-block; font-size:14.5px; font-weight:600; text-decoration:none;
+  padding:11px 20px; border-radius:999px; border:1px solid var(--accent); color:var(--accent);
+  transition:background .15s, color .15s}
+.btn:hover{background:var(--accent-soft)}
+.btn.solid{background:var(--accent); color:#fff}
+.btn.solid:hover{background:var(--accent-lift)}
+.portrait-img{width:100%; aspect-ratio:4/5; object-fit:cover; object-position:50% 22%;
+  border-radius:10px; box-shadow:0 10px 30px rgba(17,23,33,.10)}
+.portrait{background:var(--field); border:1px dashed var(--rule); border-radius:10px;
+  aspect-ratio:4/5; display:flex; align-items:center; justify-content:center; text-align:center;
+  padding:18px; color:var(--muted); font-family:"Archivo",sans-serif; font-size:13.5px; line-height:1.5}
+
+/* ---------- headings ---------- */
+h2.head{font-family:"Newsreader",serif; font-weight:600; font-size:clamp(25px,3.2vw,36px);
+  letter-spacing:-.015em; line-height:1.2; margin:0 0 14px}
+.rule-h{display:flex; align-items:baseline; gap:16px; margin:0 0 28px}
+.rule-h .n{font-family:"Archivo",sans-serif; font-size:13px; font-weight:600; color:var(--muted); white-space:nowrap}
+.rule-h .line{flex:1; height:1px; background:var(--rule)}
+.lede{font-family:"Newsreader",serif; font-size:23px; font-weight:300; line-height:1.42;
+  max-width:30em; margin:0 0 22px}
+.muted{color:var(--muted)}
+.two{display:grid; grid-template-columns:1.15fr 1fr; gap:52px; align-items:start}
+.about p{max-width:none; text-align:justify; text-wrap:pretty; hyphens:auto; -webkit-hyphens:auto}
+
+/* ---------- media, tiles ---------- */
+.fig{width:100%; display:block; border-radius:8px}
+.zoom{cursor:zoom-in}
+#lightbox{position:fixed; inset:0; z-index:200; background:rgba(12,20,32,.88);
+  display:none; align-items:center; justify-content:center; padding:32px; cursor:zoom-out}
+#lightbox.on{display:flex}
+#lightbox img{max-width:100%; max-height:100%; border-radius:6px; background:#fff}
+.zoomhint{color:var(--accent)}
+.clip{width:100%; display:block; border-radius:8px; background:transparent}
+.vrow{align-items:center; margin-bottom:52px}
+.cblock{margin:0 0 64px}
+.cblock:last-child{margin-bottom:0}
+.cblock h3.proj{margin-bottom:12px}
+.cblock > p{max-width:52em}
+.cmedia{margin-top:22px}
+.cmedia .clip, .cmedia .fig{max-height:none; width:100%; max-width:100%}
+.cmedia .caption{max-width:52em}
+.fullrow p{max-width:52em}
+.vrow:last-child{margin-bottom:0}
+.vrow h3.proj{margin-bottom:10px}
+.media{background:var(--field); border:1px dashed var(--rule); border-radius:8px;
+  aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;
+  text-align:center; padding:18px; color:var(--muted);
+  font-family:"Archivo",sans-serif; font-size:13.5px; line-height:1.5}
+.caption{font-size:14px; color:var(--muted); margin:10px 0 0; max-width:none}
+.grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px}
+.tile.feature{grid-column:1 / -1; display:grid; grid-template-columns:1.2fr 1fr; align-items:center}
+.tile.feature .media{aspect-ratio:auto; min-height:230px; border-bottom:0; border-right:1px solid var(--rule)}
+.tile.feature .tile-b{padding:34px 34px 36px; align-self:center}
+.tile.feature .tile-t{font-size:24px; margin-bottom:8px}
+.tile.feature .tile-b p.d{font-size:17px}
+.tile{background:var(--card); border:1px solid var(--rule); border-radius:10px; overflow:hidden;
+  text-decoration:none; color:inherit; display:block; transition:border-color .18s, transform .18s, box-shadow .18s}
+.tile:hover{border-color:var(--accent); transform:translateY(-3px); box-shadow:0 6px 22px rgba(17,107,81,.08)}
+.tile .media{border:0; border-radius:0; aspect-ratio:2.17; border-bottom:1px solid var(--rule)}
+.tilepic{width:100%; aspect-ratio:2.17; object-fit:cover; display:block; border-bottom:1px solid var(--rule)}
+.tilesvg{width:100%; aspect-ratio:2.17; display:block; border-bottom:1px solid var(--rule)}
+.tilepic.fit{object-fit:contain; background:var(--band2); aspect-ratio:16/9; padding:10px}
+.tile.feature .tilepic{height:auto; aspect-ratio:16/9; object-fit:contain; min-height:0; border-bottom:0; border-right:1px solid var(--rule)}
+.tile-b{padding:18px 20px 22px}
+.tile-t{font-size:16.5px; font-weight:600; margin:0 0 4px; line-height:1.3}
+.tile-w{font-size:13px; color:var(--accent); font-family:"Archivo",sans-serif; margin:0 0 8px; font-weight:500}
+.tile-b p.d{font-size:15.5px; color:var(--muted); margin:0; line-height:1.5}
+
+/* ---------- research sub-nav ---------- */
+.subnav{background:var(--band2); border-bottom:1px solid var(--rule); position:sticky; top:62px; z-index:40}
+.subnav-in{max-width:1180px; margin:0 auto; padding:0 26px; display:flex; gap:26px;
+  overflow-x:auto; scrollbar-width:none}
+.subnav-in::-webkit-scrollbar{display:none}
+.subnav a{font-size:14.5px; font-weight:500; color:var(--muted); text-decoration:none;
+  padding:15px 0; white-space:nowrap; border-bottom:2px solid transparent; transition:color .15s}
+.subnav a:hover{color:var(--ink)}
+.subnav a[aria-current="true"]{color:var(--ink); border-bottom-color:var(--accent)}
+
+/* ---------- stats ---------- */
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--rule);
+  border:1px solid var(--rule); border-radius:10px; overflow:hidden; margin-top:34px}
+.stats > div{background:var(--card); padding:24px 22px}
+.stat{font-size:27px; font-weight:600; letter-spacing:-.02em; color:var(--accent); line-height:1.1}
+.stats p{font-size:14.5px; color:var(--muted); margin:8px 0 0; max-width:20em; line-height:1.45}
+
+/* ---------- contributions ---------- */
+.contrib{background:var(--card); border:1px solid var(--rule); border-radius:10px;
+  padding:24px 26px; margin-bottom:16px}
+.contrib h3{font-size:18.5px; font-weight:600; margin:0 0 10px; line-height:1.3}
+.contrib p{margin:0; max-width:52em}
+.tag{display:inline-block; font-size:11.5px; font-weight:600; color:var(--accent);
+  background:var(--accent-soft); border-radius:999px; padding:3px 10px; vertical-align:3px; margin-left:8px}
+
+/* ---------- lists ---------- */
+ol.pubs{list-style:none; counter-reset:p; margin:0; padding:0}
+ol.pubs li{counter-increment:p; position:relative; padding-left:42px; margin-bottom:26px; max-width:44em}
+ol.pubs li::before{content:"[" counter(p) "]"; position:absolute; left:0; top:2px;
+  font-family:"Archivo",sans-serif; font-size:13.5px; color:var(--muted)}
+.venue{font-style:italic}
+.links-row{font-size:14px; margin-top:6px}
+.links-row a{color:var(--accent); text-decoration:none; margin-right:14px; font-weight:500;
+  border-bottom:1px solid var(--accent)}
+.row{display:grid; grid-template-columns:160px 1fr; gap:24px; padding:18px 0; border-top:1px solid var(--rule)}
+.row:first-of-type{border-top:0}
+.rule-h + .row{border-top:0}
+.when{font-size:13.5px; color:var(--muted); padding-top:4px}
+.row strong{font-weight:600; font-family:"Archivo",sans-serif; font-size:16px}
+.row .sub{color:var(--muted); font-size:16.5px}
+.meta{font-size:14px; color:var(--muted); margin:0 0 18px}
+.metalead{font-family:"Archivo",sans-serif; font-size:16.5px; font-weight:600; letter-spacing:.01em;
+  color:var(--accent); margin:0 0 24px; max-width:none}
+ul.bul{max-width:44em; padding-left:1.1em; margin:0}
+ul.bul li{margin-bottom:8px}
+h3.proj{font-size:21px; font-weight:600; margin:0 0 4px}
+.cvitem{margin:0 0 26px; max-width:52em}
+.cvitem:last-child{margin-bottom:0}
+.cvhead{display:flex; justify-content:space-between; align-items:baseline; gap:20px;
+  font-family:"Archivo",sans-serif; font-size:16.5px; margin:0 0 3px; max-width:none}
+.cvhead .when{padding-top:0; white-space:nowrap}
+.cvsub{font-size:15.5px; color:var(--muted); margin:0 0 8px; max-width:none}
+.cvgroup{font-family:"Archivo",sans-serif; font-size:14px; font-weight:600; color:var(--accent);
+  margin:0 0 10px; max-width:none}
+.cvitem .bul{font-size:16.5px}
+.cvitem .bul li{margin-bottom:5px}
+
+footer{background:var(--band); border-top:1px solid var(--rule); color:var(--muted); margin-top:76px}
+footer .section{padding-top:36px; padding-bottom:36px; display:flex; justify-content:space-between;
+  gap:20px; flex-wrap:wrap; font-size:14.5px}
+footer a{color:var(--ink)}
+
+
+@media (max-width:1000px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .tile.feature{grid-template-columns:1fr}
+  .tile.feature .media,.tile.feature .tilepic{min-height:0; height:auto; aspect-ratio:16/9; border-right:0; border-bottom:1px solid var(--rule)}
+  .tile.feature .tile-b{padding:22px 24px 26px}
+}
+@media (max-width:900px){
+  .hero-in{grid-template-columns:1fr; gap:34px; padding:52px 26px 48px}
+  .portrait,.portrait-img{max-width:260px; aspect-ratio:1/1}
+  .two{grid-template-columns:1fr; gap:34px}
+  .stats{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  body{font-size:17px}
+  .bar-in{height:auto; padding:12px 18px; flex-direction:column; align-items:flex-start; gap:8px}
+  .subnav{top:0; position:static}
+  nav.tabs a{padding:6px 10px; font-size:14px}
+  .section{padding:0 20px}
+  .hero-in{padding:44px 20px 40px}
+  .pad{padding-top:48px} .pad-b{padding-bottom:48px}
+  .grid{grid-template-columns:1fr}
+  .stats{grid-template-columns:1fr}
+  .row{grid-template-columns:1fr; gap:4px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important} .helix-run{animation:none}}
+</style>
+
+<style id="editorial">
+/* ---- section labels: title, then a rule under it ---- */
+.rule-h{display:block; border-bottom:1px solid var(--rule); padding-bottom:12px; margin:0 0 26px}
+.rule-h .n{font-family:"Archivo",sans-serif; font-size:13px; font-weight:600;
+  letter-spacing:.11em; text-transform:uppercase; color:var(--accent)}
+.rule-h .line{display:none}
+
+/* ---- home: hero sits on its own band ---- */
+.hero{background:var(--band2); border-bottom:1px solid var(--rule)}
+.hero-art{opacity:.10}
+
+/* ---- home: About heading in its own column ---- */
+@media (min-width:901px){
+  .about{display:grid; grid-template-columns:230px minmax(0,1fr); column-gap:56px}
+  .about h2.head{grid-row:1 / 5; margin-top:4px}
+  .about p{max-width:46em; text-align:left; hyphens:none}
+}
+
+/* ---- home: more room inside the project tiles ---- */
+.tile-b{padding:24px}
+.tile-t{font-size:20px; line-height:1.35; margin-bottom:12px}
+.tile-w{font-size:13px; line-height:1.6; margin-bottom:10px}
+.tile-b p.d{font-size:17px}
+.tile.feature .tile-b{padding:34px}
+.tile.feature .tile-t{font-size:26px}
+
+/* ---- research: numbered case-study blocks ---- */
+.contributions{counter-reset:chapter}
+.cblock{position:relative; margin:0!important; padding:42px 0 44px 58px;
+  border-bottom:1px solid var(--rule); counter-increment:chapter;
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:44px; align-items:start}
+.cblock:last-child{border-bottom:0}
+.cblock::before{content:counter(chapter,decimal-leading-zero); position:absolute; left:0; top:45px;
+  font-family:"Archivo",sans-serif; font-size:14px; font-weight:600; color:var(--accent); letter-spacing:.04em}
+.cblock h3.proj{font-size:22px; line-height:1.35; margin:0 0 16px}
+.cblock p{max-width:none; margin-bottom:14px}
+.cblock p:last-of-type{margin-bottom:0}
+.cblock .cmedia{margin:0; align-self:start}
+.cblock.text-only{grid-template-columns:1fr}
+.cblock.text-only .chapter-copy{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); gap:44px}
+.cblock.text-only h3.proj{margin:0}
+@media (max-width:1000px){
+  .cblock, .cblock.text-only{grid-template-columns:1fr 1fr; gap:28px; padding-left:44px}
+}
+@media (max-width:760px){
+  .cblock, .cblock.text-only{grid-template-columns:1fr; gap:20px; padding-left:36px}
+}
+
+/* research: project header */
+.project-header{padding-bottom:28px; border-bottom:1px solid var(--rule); margin-bottom:34px}
+.project-index{font-family:"Archivo",sans-serif; font-size:12px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:16px}
+.project-header h2.head{margin-bottom:16px}
+.project-header .metalead{font-size:14.5px; line-height:1.7; font-weight:400;
+  letter-spacing:0; color:var(--muted); margin:0}
+
+.problem-section .two{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:56px; align-items:start}
+.problem-section p{max-width:none}
+
+/* justified body text in project descriptions */
+.chapter-copy p, .problem-copy p, .problem-section p, .project-intro p:not(.caption):not(.metalead),
+.subpanel > .section > p{text-align:justify; text-wrap:pretty; hyphens:auto; -webkit-hyphens:auto}
+.caption, .metalead, .project-index{text-align:left; hyphens:none}
+
+.problem-section .two{align-items:center}
+.cblock.center-media .cmedia{align-self:center}
+
+/* a block whose figures run full width beneath the text */
+.cblock.wide-media{grid-template-columns:1fr}
+.cblock.wide-media .chapter-copy{display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.42fr); gap:44px}
+.cblock.wide-media h3.proj{margin:0}
+.media-row{display:grid; grid-template-columns:1fr 1fr; grid-template-rows:auto auto;
+  column-gap:34px; row-gap:0; margin-top:34px}
+.media-row .cmedia{display:contents}
+.media-row .cmedia > :first-child{grid-row:1; align-self:center}
+.media-row .cmedia > .caption{grid-row:2}
+.media-row .cmedia:nth-child(1) > *{grid-column:1}
+.media-row .cmedia:nth-child(2) > *{grid-column:2}
+@media (max-width:760px){
+  .cblock.wide-media .chapter-copy{grid-template-columns:1fr; gap:16px}
+  .media-row{grid-template-columns:1fr; grid-template-rows:none; row-gap:24px}
+  .media-row .cmedia{display:block}
+  .media-row .cmedia > *{grid-column:auto; grid-row:auto}
+}
+
+.project-intro{padding-top:44px; padding-bottom:0}
+.project-intro .caption{margin-bottom:0}
+
+/* caterpillar, centipede and aerial: more air above the contributions rule */
+#sub-caterpillar .contributions, #sub-centipede .contributions, #sub-aerial .contributions{padding-top:56px}
+#sub-caterpillar .contributions > .rule-h,
+#sub-centipede .contributions > .rule-h,
+#sub-aerial .contributions > .rule-h{margin-bottom:8px}
+#sub-caterpillar .contributions .cblock:first-of-type,
+#sub-centipede .contributions .cblock:first-of-type,
+#sub-aerial .contributions .cblock:first-of-type{padding-top:30px}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="bar-in">
+    <a class="brand" href="#home">Hanlin Shi <em>· Harry</em></a>
+    <nav class="tabs" id="tabs">
+      <a href="#home" data-tab="home">Home</a>
+      <a href="#research" data-tab="research">Research</a>
+      <a href="#cv" data-tab="cv">CV</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ==================== HOME — about me ==================== -->
+<section class="panel is-active" id="panel-home">
+
+  <div class="hero">
+    <div class="hero-art" aria-hidden="true">
+      <svg viewBox="0 0 1200 420" preserveAspectRatio="xMidYMid slice">
+        <g stroke="var(--accent)" fill="none" opacity=".45">
+          <line x1="-40" y1="132" x2="1240" y2="132" stroke-width="1.5"/>
+          <line x1="-40" y1="288" x2="1240" y2="288" stroke-width="1.5"/>
+        </g>
+        <g class="helix-run" fill="none" stroke-linecap="round">
+          <path stroke="var(--accent)" stroke-width="2" opacity=".3" d="M-176 288 -168 284 -160 278 -152 268 -144 256 -136 242 -128 226 -120 210 -112 194 -104 178 -96 164 -88 152 -80 142 -72 136 -64 132 -56 132M64 288 72 284 80 278 88 268 96 256 104 242 112 226 120 210 128 194 136 178 144 164 152 152 160 142 168 136 176 132 184 132M304 288 312 284 320 278 328 268 336 256 344 242 352 226 360 210 368 194 376 178 384 164 392 152 400 142 408 136 416 132 424 132M544 288 552 284 560 278 568 268 576 256 584 242 592 226 600 210 608 194 616 178 624 164 632 152 640 142 648 136 656 132 664 132M784 288 792 284 800 278 808 268 816 256 824 242 832 226 840 210 848 194 856 178 864 164 872 152 880 142 888 136 896 132 904 132M1024 288 1032 284 1040 278 1048 268 1056 256 1064 242 1072 226 1080 210 1088 194 1096 178 1104 164 1112 152 1120 142 1128 136 1136 132 1144 132M1264 288 1272 284 1280 278 1288 268 1296 256 1304 242 1312 226 1320 210 1328 194 1336 178 1344 164 1352 152 1360 142 1368 136 1376 132 1384 132"/>
+          <path stroke="var(--accent)" stroke-width="6" opacity=".85" d="M-240 210 -232 226 -224 242 -216 256 -208 268 -200 278 -192 284 -184 288 -176 288M-56 132 -48 136 -40 142 -32 152 -24 164 -16 178 -8 194 0 210 8 226 16 242 24 256 32 268 40 278 48 284 56 288 64 288M184 132 192 136 200 142 208 152 216 164 224 178 232 194 240 210 248 226 256 242 264 256 272 268 280 278 288 284 296 288 304 288M424 132 432 136 440 142 448 152 456 164 464 178 472 194 480 210 488 226 496 242 504 256 512 268 520 278 528 284 536 288 544 288M664 132 672 136 680 142 688 152 696 164 704 178 712 194 720 210 728 226 736 242 744 256 752 268 760 278 768 284 776 288 784 288M904 132 912 136 920 142 928 152 936 164 944 178 952 194 960 210 968 226 976 242 984 256 992 268 1000 278 1008 284 1016 288 1024 288M1144 132 1152 136 1160 142 1168 152 1176 164 1184 178 1192 194 1200 210 1208 226 1216 242 1224 256 1232 268 1240 278 1248 284 1256 288 1264 288M1384 132 1392 136 1400 142 1408 152 1416 164 1424 178 1432 194 1440 210"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="hero-in">
+      <div>
+        <p class="eyebrow">Biorobotics Lab · Robotics Institute · Carnegie Mellon University</p>
+        <h1>Hi, I'm Harry — I work on bio-inspired robots, and how they move, sense, and find their way.</h1>
+        <div class="cta">
+          <a class="btn" href="mailto:harryshi@andrew.cmu.edu">Email me</a>
+          <a class="btn" href="CV_Hanlin_Shi.pdf">CV (PDF)</a>
+        </div>
+      </div>
+      <img class="portrait-img" src="media/headshot.jpg" alt="Hanlin (Harry) Shi">
+    </div>
+  </div>
+
+  <div class="section pad">
+    <div class="about">
+      <h2 class="head">About me</h2>
+        <p>I'm a master's student in Mechanical Engineering at Carnegie Mellon University, working in the Biorobotics Lab with Prof. Howie Choset. I grew up curious about how animals move, and I've been asking what happens when you give a robot a body that behaves more like theirs: flexible, many-jointed, and in constant contact with its surroundings. Bodies like that are hard to design, model, and control — and they can reach places other robots can't. That's what I find interesting.</p>
+        <p>That curiosity first took concrete form at Bucknell University, where I worked on soft crawling robots inspired by caterpillars and centipedes, designing the mechanisms and gaits that make them move. A summer at MIT simulating flapping wings for a micro-aerial robot pushed me further into robot modeling and control. At CMU, my work adds another layer: a snake robot navigating the outside of a complex pipe network has to figure out how to move robustly across varying pipe geometries, while keeping track of where it is from what its own body senses. These experiences have grounded me in the full path from mechanism to control to state estimation, and made me want to keep working on robots that learn from the many ways animals move to navigate unstructured environments.</p>
+      <p>I'm hoping to continue this in a PhD, working on these questions in depth — building robots that move in ways we haven't built before, so they can operate where nothing else can.</p>
+    </div>
+  </div>
+
+  <div class="section pad pad-b">
+    <h2 class="head" style="margin-bottom:28px">Research projects</h2>
+    <div class="grid">
+      <a class="tile feature" href="#research/snake" data-tab-link="research" data-sub-link="snake">
+        <img class="tilepic" src="media/tile-snake.jpg" alt="Snake robot wrapped around pipes on the experimental pipe network testbed">
+        <div class="tile-b">
+          <p class="tile-w">Biorobotics Lab, CMU · 2025–present</p>
+          <p class="tile-t">Autonomous external pipe navigation for snake robots</p>
+          <p class="d">Toward inspecting complex pipe networks beyond an operator's line of sight. Snake robots climb the outside of the pipes, adapt their grip as the diameter changes, cross junctions between branches, and keep track of where they are from onboard sensing.</p>
+        </div>
+      </a>
+      <a class="tile" href="#research/caterpillar" data-tab-link="research" data-sub-link="caterpillar">
+        <img class="tilepic" src="media/tile-caterpillar.jpg" alt="Caterpillar-inspired soft robot mid-gait with a body segment arched off the table">
+        <div class="tile-b">
+          <p class="tile-w">Soft Robotics Lab, Bucknell · 2022–2024</p>
+          <p class="tile-t">Caterpillar-inspired soft robot</p>
+          <p class="d">Mechanism and gait design for a modular, 3D-printed crawler with tendon-driven bending segments and steering.</p>
+        </div>
+      </a>
+      <a class="tile" href="#research/centipede" data-tab-link="research" data-sub-link="centipede">
+        <img class="tilepic" src="media/tile-centipede.jpg" alt="Centipede-inspired robot with servo-driven segments and legs on a bench">
+        <div class="tile-b">
+          <p class="tile-w">Soft Robotics Lab, Bucknell · 2023–2025</p>
+          <p class="tile-t">Centipede-inspired soft robot</p>
+          <p class="d">Mechanism and control design for a modular soft crawler whose segments couple body bending with leg lift.</p>
+        </div>
+      </a>
+      <a class="tile" href="#research/aerial" data-tab-link="research" data-sub-link="aerial">
+        <img class="tilepic" src="media/aerial-schematic.jpg" alt="Schematic of the flapping-wing robot: stroke angle and passive pitch, and the aerodynamic force components through one stroke">
+        <div class="tile-b">
+          <p class="tile-w">Soft and Micro Robotics Lab, MIT · summer 2024</p>
+          <p class="tile-t">Sub-gram aerial robot simulation</p>
+          <p class="d">Simulation of flapping-wing kinematics and the aerodynamic forces generated by a soft-actuated micro aerial vehicle.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ==================== RESEARCH ==================== -->
+<section class="panel" id="panel-research">
+  <div class="subnav">
+    <div class="subnav-in" id="subnav">
+      <a href="#research/snake" data-sub="snake">Snake robots in pipes</a>
+      <a href="#research/caterpillar" data-sub="caterpillar">Caterpillar robot</a>
+      <a href="#research/centipede" data-sub="centipede">Centipede robot</a>
+      <a href="#research/aerial" data-sub="aerial">Aerial robot simulation</a>
+    </div>
+  </div>
+
+  <!-- ---------- snake ---------- -->
+  <div class="subpanel is-active" id="sub-snake">
+    <div class="section project-intro">
+      <header class="project-header"><span class="project-index">Research / 01</span>
+      <h2 class="head" style="max-width:none">Autonomous external pipe navigation for snake robots</h2>
+      <p class="metalead">Biorobotics Lab, Robotics Institute, Carnegie Mellon · advised by Prof. Howie Choset · 2025–present</p></header>
+      <video class="clip" muted loop playsinline preload="metadata" poster="media/snake-hero-poster.jpg"><source src="media/snake-hero.mp4" type="video/mp4"></video>
+      <p class="caption">Snake robot navigation across different geometries on the physical pipe network.</p>
+    </div>
+
+    <div class="section pad problem-section">
+      <div class="two">
+        <div>
+          <h2 class="head">The problem</h2>
+          <p>Intricate pipe networks are essential across many industries, such as chemical processing plants, power generation facilities, and municipal water distribution pipelines, but their complex geometries make inspection and maintenance difficult and unsafe for humans. Snake robots are well-suited for these environments because their hyper-redundant bodies can conform to tight, irregular pipe structures.</p>
+          <p>Our lab previously developed a set of kinematic gaits to navigate the exterior of pipes and negotiate various geometries: a rolling helix for climbing straight pipes, a windowed variant that reaches across a perpendicular T-junction, and a spiraling gait that rotates the robot around the pipe to pass obstructions.</p>
+          <p>However, the current system executes these gaits open-loop. Without contact feedback, the robot must grip conservatively to avoid slipping, which loads the joint actuators heavily and limits gait speed. The windowed rolling helix, which lets the head reach onto a new branch while the tail keeps its grip, also depends on knowing when the robot is approaching a junction and how it is oriented relative to that junction, and at present the operator supplies both by visual inspection, which fails as soon as the pipe run leaves line of sight.</p>
+          <p>The objective of this project is to close both loops onboard: to regulate contact from the robot's own torque sensing, and to infer the surrounding geometry from its own proprioception.</p>
+        </div>
+        <div><img data-full="media/snake-helix.jpg" class="fig zoom" src="media/snake-helix.jpg" alt="Snake robot wrapped helically around a pipe" loading="lazy"><p class="caption">Snake robot climbs by wrapping around the pipe in a rolling helix. <span class="zoomhint">Click to enlarge.</span></p></div>
+      </div>
+    </div>
+
+    <div class="section pad pad-b contributions">
+      <div class="rule-h"><span class="n">Contributions</span><span class="line"></span></div>
+
+      <article class="cblock center-media">
+        <div class="chapter-copy">
+        <h3 class="proj">Compliant control: deviation-driven shape-based compliance (DSBC) controller</h3>
+        <p>Standard shape-based compliance cannot distinguish the contact load from the steady load required to hold the robot on the pipe, and consequently relaxes its grip under gravitational loading alone. I developed the DSBC controller to resolve this: it filters the measured joint torque against a reference, treats only the deviation as contact, and modulates the commanded joint angles to tighten or loosen the wrap in response. Removing the need to over-grip reduced traversal times by roughly half across straight pipes, obstacles and junctions, and lowered joint actuation effort throughout. It also allows the robot to adapt to changes in pipe diameter autonomously, without any change of command from the operator.</p>
+        </div>
+        <div class="cmedia"><img class="fig zoom" data-full="media/dsbc-full.jpg" src="media/dsbc-diagram.jpg" alt="Block diagram of the deviation-driven shape-based compliance controller" loading="lazy"><p class="caption">DSBC controller block diagram. <span class="zoomhint">Click to enlarge.</span></p></div>
+      </article>
+      <article class="cblock">
+        <div class="chapter-copy">
+        <h3 class="proj">Arbitrary-angle junctions: generalized windowed rolling helix gait</h3>
+        <p>The windowed rolling helix was originally formulated for perpendicular branches, with a fixed phase offset between the head and tail windows. I generalized that offset as a function of the branch angle, so a single formulation covers arbitrary junction geometries. The gait was validated on hardware at a 135° Y-junction.</p>
+        </div>
+        <div class="cmedia"><img class="fig zoom" data-full="media/snake-yjunction-snapshots.jpg" src="media/snake-yjunction-snapshots.jpg" alt="Snapshot sequence of the robot traversing a 135-degree Y-junction, with a simulation view" loading="lazy"><p class="caption">Traversing a 135° Y-junction: (a)–(e) hardware over 36 seconds, (f) maneuver in PyBullet simulation. <span class="zoomhint">Click to enlarge.</span></p></div>
+      </article>
+      <article class="cblock">
+        <div class="chapter-copy">
+        <h3 class="proj">Pipe geometry estimation: virtual chassis from proprioception</h3>
+        <p>Beyond executing a maneuver, the robot needs to know what it is climbing. I developed a real-time estimation pipeline, built on the Virtual Chassis formalism, that recovers the pipe axis, the robot's orientation relative to it, and the pipe radius from joint encoders and IMUs alone. The standard SVD-based chassis-axis estimator degenerates at the wrap angles this gait employs, so I replaced it with a Levenberg–Marquardt centerline fit. Pipe inclination is estimated through a complementary filter fusing gyroscope and accelerometer measurements, achieving a mean error of approximately 2.5°.</p>
+        <p>I also corrected the radius model: the robot wraps the pipe as a polygon rather than a circle, so sampling radius at the joints over-reads the diameter, and measuring instead where the links contact the pipe reduces the error from +21% to under 4%.</p>
+        </div>
+        <div class="cmedia"><video class="clip" muted loop playsinline controls preload="metadata" poster="media/snake-tilt-poster.jpg"><source src="media/snake-tilt.mp4" type="video/mp4"></video><p class="caption">Estimating pipe inclination and diameter from joint encoders and IMUs while the robot grips a tilted pipe.</p></div>
+      </article>
+      <article class="cblock">
+        <div class="chapter-copy">
+        <h3 class="proj">Pipe profile reconstruction: gait-based odometry</h3>
+        <p>Tracking displacement along the pipe from the gait's own cycles turns those per-instant estimates into a map. Each rolling-helix cycle advances the robot by a known amount along the pipe axis, so integrating over cycles gives distance travelled without any external reference. Combined with the estimated axis direction and radius at each point, this reconstructs the geometry the robot has passed through, including changes in inclination and diameter between segments.</p>
+        </div>
+        <div class="cmedia"><video class="clip" muted loop playsinline controls preload="metadata" poster="media/snake-rolling-poster.jpg"><source src="media/snake-rolling.mp4" type="video/mp4"></video><p class="caption">Live pipe profile reconstruction from tilt and diameter estimations.</p></div>
+      </article>
+      <article class="cblock">
+        <div class="chapter-copy">
+        <h3 class="proj">Junction detection: contact force from joint torque</h3>
+        <p>Autonomous junction traversal requires the robot to detect a junction and determine its orientation relative to it. I am developing a model that estimates contact force from joint torque. Contact is decomposed into two components: a radial force, which reflects how tightly the robot is gripping the pipe, and an axial force along the pipe, which indicates the presence of a junction. Localizing where along the body that force acts identifies which modules are in contact with the junction — the information the windowed rolling helix needs to initiate a transition. The model is verified by applying known axial loads, with a real-time visualization showing the average gripping force alongside the applied external force and its location.</p>
+        </div>
+        <div class="cmedia"><video class="clip" muted loop playsinline controls preload="metadata" poster="media/snake-contact-poster.jpg"><source src="media/snake-contact.mp4" type="video/mp4"></video><p class="caption">Known axial loads applied to the robot, with the estimated gripping force and the applied external force visualized in real time.</p></div>
+      </article>
+    </div>
+  </div>
+
+  <!-- ---------- centipede ---------- -->
+  <div class="subpanel" id="sub-caterpillar">
+    <div class="section project-intro">
+      <header class="project-header"><span class="project-index">Research / 02</span>
+      <h2 class="head" style="max-width:none">Caterpillar-inspired soft robot</h2>
+      <p class="metalead">Soft Robotics Lab, Bucknell University · advised by Prof. William Scott · 2022–2024</p></header>
+
+      <video class="clip" style="margin-top:22px" muted loop playsinline preload="metadata" poster="media/caterpillar-locomotion-poster.jpg"><source src="media/caterpillar-locomotion.mp4" type="video/mp4"></video>
+      <p class="caption">Locomotion and steering of the caterpillar-inspired soft robot.</p>
+
+      <p style="margin-top:36px; max-width:52em">Soft crawling robots can reach spaces rigid robots cannot, but their compliance makes them difficult to model and control. Most tendon-driven caterpillar robots advance by sliding their feet along the ground, which limits traction and makes steering impractical. Lifting the feet clear of the ground instead requires both a body whose segments can bend sufficiently in either direction and a gait that coordinates them. The objective of this project was to design a tendon-driven crawling robot capable of lifting its feet, together with the gaits that produce that motion, and to extend the design with steering.</p>
+    </div>
+
+    <div class="section pad-b contributions">
+      <div class="rule-h"><span class="n">Contributions</span><span class="line"></span></div>
+
+      <article class="cblock center-media">
+        <div class="chapter-copy">
+        <h3 class="proj">Hardware design</h3>
+        <p>The robot is built from an alternating chain of flexible bending segments and rigid hubs, so it can be assembled with any number of segments. Each segment is 3D printed in FilaFlex, a thermoplastic elastomer, and acts as a spring: a tendon routed through guide tubes along its centerline is wound by a motor in the adjacent hub, bending the segment against its own elasticity. Prolegs printed in the same material support the body and provide friction at the ground.</p>
+        <p>The design difference that matters is the angle at which segments meet the hubs. Earlier tendon-driven caterpillar robots connect them flat, so the prolegs are parallel when the segments are straight. Connecting them at 45° places the neutral stance at the midpoint of each segment's range rather than at one end, leaving enough range of motion in both directions for neighbouring segments to coordinate and lift a foot clear of the ground.</p>
+        </div>
+        <div class="cmedia"><img data-full="media/caterpillar-hardware.jpg" class="fig zoom" src="media/caterpillar-hardware.jpg" alt="CAD render of the caterpillar robot labelling motor, hub, flexible segment, tube, string and pulley" loading="lazy"><p class="caption">Modular hardware: flexible tendon-driven segments alternating with rigid hubs. <span class="zoomhint">Click to enlarge.</span></p></div>
+      </article>
+
+      <article class="cblock wide-media">
+        <div class="chapter-copy">
+        <h3 class="proj">Kinematic model and gait design</h3>
+        <p>We modelled the robot as a planar quasi-static system in which each flexible segment bends into a circular arc, so its configuration reduces to a few shape variables and a gait becomes a periodic trajectory through that space. Designing gaits this way produced crawling that lifts the feet clear of the ground rather than relying on sliding, and displacement per cycle grows with both segment count and amplitude.</p>
+        </div>
+        <div class="media-row"><div class="cmedia"><img data-full="media/caterpillar-model.jpg" class="fig zoom" src="media/caterpillar-model.jpg" alt="Geometry of the caterpillar model showing hub poses, segment length, bending angle and connection angle" loading="lazy"><p class="caption">Model geometry: hub poses follow from the segment bending angles. <span class="zoomhint">Click to enlarge.</span></p></div><div class="cmedia"><img data-full="media/caterpillar-snapshots.jpg" class="fig zoom" src="media/caterpillar-snapshots.jpg" alt="Simulated and experimental snapshots of the three-segment robot through one stance interval" loading="lazy"><p class="caption">Simulated (left) and experimental (right) snapshots through one stance interval. <span class="zoomhint">Click to enlarge.</span></p></div></div>
+      </article>
+
+
+      <article class="cblock center-media">
+        <div class="chapter-copy">
+        <h3 class="proj">Steering</h3>
+        <p>Steering required a second degree of freedom. I designed a modified segment with a fishbone structure — a central backbone with ribs on either side routing a second pair of tendons — and thickened the backbone so its bending stiffness matches the standard segment. Winding those tendons in opposite directions bends the segment out of plane in either direction.</p>
+        <p>With the steering segment placed at the center of a three-segment robot, turning rate is linear in the steering pulley angle up to a saturation point, beyond which the robot risks tipping. Placing it at the front or rear gave lower turning rates and less stability.</p>
+        </div>
+        <div class="cmedia"><img data-full="media/caterpillar-steering.jpg" class="fig zoom" src="media/caterpillar-steering.jpg" alt="Overhead view of the robot with the steering segment bent, showing the turning angle" loading="lazy"><p class="caption">Overhead view: the steering angle Ψ is measured between the first and last hubs. <span class="zoomhint">Click to enlarge.</span></p></div>
+      </article>
+    </div>
+  </div>
+
+  <!-- ---------- caterpillar ---------- -->
+  <div class="subpanel" id="sub-centipede">
+    <div class="section project-intro">
+      <header class="project-header"><span class="project-index">Research / 03</span>
+      <h2 class="head" style="max-width:none">Centipede-inspired soft robot</h2>
+      <p class="metalead">Soft Robotics Lab, Bucknell University · advised by Prof. William Scott · 2023–2025</p></header>
+
+      <video class="clip" style="margin-top:22px" muted loop playsinline preload="metadata" poster="media/centipede-crawl-poster.jpg"><source src="media/centipede-crawl.mp4" type="video/mp4"></video>
+      <p class="caption">The centipede-inspired robot crawling on a bench.</p>
+
+      <p style="margin-top:36px; max-width:52em">Centipedes combine a travelling wave along the body with the lifting of successive leg pairs. Reproducing that in a robot typically requires separate actuators for body bending and leg motion, so the actuation and control burden grows with body length. The objective of this project was to realize that coupling mechanically, such that a single actuator per segment produces both body bending and leg lift.</p>
+    </div>
+
+    <div class="section pad-b contributions">
+      <div class="rule-h"><span class="n">Contributions</span><span class="line"></span></div>
+
+      <article class="cblock text-only">
+        <div class="chapter-copy">
+        <h3 class="proj">A segment that couples body bending and leg lift</h3>
+        <p>Centipedes coordinate a wave along the body with the lifting of each pair of legs. I designed a modular segment that reproduces that coupling mechanically: one servo per segment drives a pair of flexible links, which bend the body and raise the legs together, so the coupled motion comes from the mechanism rather than from coordinating separate actuators.</p>
+      
+        </div>
+      </article>
+
+      <article class="cblock text-only">
+        <div class="chapter-copy">
+        <h3 class="proj">Gait control</h3>
+        <p>An offboard controller drives the segments through a traveling wave, producing the crawling gait shown above. The robot is built to be extended segment by segment, so gaits can be tested across different body lengths.</p>
+      
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- ---------- aerial ---------- -->
+  <div class="subpanel" id="sub-aerial">
+    <div class="section project-intro">
+      <header class="project-header"><span class="project-index">Research / 04</span>
+      <h2 class="head" style="max-width:none">Sub-gram aerial robot flapping-wing simulation</h2>
+      <p class="metalead">Soft and Micro Robotics Lab, MIT · advised by Prof. Yufeng (Kevin) Chen · summer 2024</p></header>
+
+      <img data-full="media/aerial-schematic.jpg" class="fig zoom" style="margin-top:22px" src="media/aerial-schematic.jpg" alt="Schematic of the flapping-wing robot: stroke angle, and the wing chord with aerodynamic force components through one stroke" loading="lazy">
+      <p class="caption">The wing sweeps through a stroke angle while pitching passively; the aerodynamic force on the chord varies through the stroke.</p>
+
+      <p style="margin-top:36px; max-width:52em">At insect scale, direct actuation of every wing degree of freedom is impractical. A dielectric elastomer actuator drives the stroke, while wing pitch arises passively from aerodynamic loading about a compliant hinge. Wing orientation, and consequently the lift generated, must therefore be predicted rather than prescribed. The objective of this project was to model the coupled stroke and pitch motion, and to predict the aerodynamic forces it produces over a stroke.</p>
+    </div>
+
+    <div class="section pad-b contributions">
+      <div class="rule-h"><span class="n">Contributions</span><span class="line"></span></div>
+
+      <article class="cblock">
+        <div class="chapter-copy">
+        <h3 class="proj">Wing motion model</h3>
+        <p>A flapping wing is driven at its root but twists passively under aerodynamic load, so its orientation at any instant is not commanded directly. I built a MATLAB model that predicts the wing's position through the stroke from the active stroke motion and the passive pitching that results, giving the state of any point on the wing at each timestep.</p>
+        </div>
+        <div class="cmedia"><video class="clip zoom" data-full="media/aerial-wing.mp4" style="margin-top:22px; max-width:620px" muted loop playsinline preload="metadata" poster="media/aerial-wing-poster.jpg"><source src="media/aerial-wing.mp4" type="video/mp4"></video><p class="caption">Simulated wing chord through one stroke, with the leading edge marked in red. <span class="zoomhint">Click to enlarge.</span></p></div>
+      </article>
+
+      <article class="cblock text-only">
+        <div class="chapter-copy">
+        <h3 class="proj">Aerodynamic force prediction</h3>
+        <p>From that motion, the model predicts the aerodynamic forces the wing generates over a stroke — the quantity that sets how much lift the soft actuator driving the wing has to produce.</p>
+      
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PUBLICATIONS ==================== -->
+
+<!-- ==================== CV ==================== -->
+<section class="panel" id="panel-cv">
+  <div class="section pad-b" style="padding-top:44px">
+    <h2 class="head" style="max-width:none">Curriculum vitae</h2>
+    <p class="metalead">Hanlin (Harry) Shi · harryshi@andrew.cmu.edu · Biorobotics Lab, Robotics Institute, Carnegie Mellon University</p>
+    <p style="margin-top:20px"><a class="btn" href="CV_Hanlin_Shi.pdf">Download as PDF</a></p>
+  </div>
+
+  <div class="section pad-b" style="padding-top:8px">
+    <div class="rule-h"><span class="n">Education</span><span class="line"></span></div>
+    <div class="row"><span class="when">Expected May 2027</span>
+      <span><strong>Carnegie Mellon University</strong>, Pittsburgh, PA<br>
+      <span class="sub">Master of Science in Mechanical Engineering · Cumulative GPA 4.0/4.0</span></span></div>
+    <div class="row"><span class="when">May 2025</span>
+      <span><strong>Bucknell University</strong>, Lewisburg, PA<br>
+      <span class="sub">Bachelor of Science in Mechanical Engineering, summa cum laude · Minor in Mathematics<br>Cumulative GPA 3.94/4.0</span></span></div>
+  </div>
+
+  <div class="section pad-b" style="padding-top:8px">
+    <div class="rule-h"><span class="n">Honors and awards</span><span class="line"></span></div>
+    <div class="row"><span class="when">May 2025</span>
+      <span><strong>Summa Cum Laude</strong>, Bucknell University<br>
+      <span class="sub">Awarded to graduating students in the highest band of cumulative grade point average</span></span></div>
+    <div class="row"><span class="when">November 2023</span>
+      <span><strong>Member, Pennsylvania Eta Chapter of Tau Beta Pi Honor Society</strong><br>
+      <span class="sub">A national engineering honor society founded in 1885 to recognize outstanding students who display both distinguished scholarship in technical fields and exemplary character</span></span></div>
+    <div class="row"><span class="when">Each semester</span>
+      <span><strong>Dean's List</strong>, Bucknell University<br>
+      <span class="sub">Awarded to each student who achieves a 3.50 or higher GPA for the semester</span></span></div>
+  </div>
+
+  <div class="section pad-b" style="padding-top:8px">
+    <div class="rule-h"><span class="n">Publications and presentations</span><span class="line"></span></div>
+
+    <p class="cvgroup">Journal papers</p>
+    <ol class="pubs">
+      <li><strong>H. Shi</strong>, J. Kallarackal, K. Karumanchi, S. Pellegrini, A. Orekhov, A. Vu, B. Vundurthy and H. Choset, "A unified compliant locomotion framework for snake robot navigation in complex external pipe networks," <span class="venue">IEEE Transactions on Automation Science and Engineering</span>, under review, 2026.</li>
+    </ol>
+
+    <p class="cvgroup" style="margin-top:24px">Conference papers</p>
+    <ol class="pubs">
+      <li><strong>H. Shi</strong> and W. L. Scott, "Crawling gait design for a caterpillar-inspired robot with tendon-driven flexible bending segments," in <span class="venue">7th IEEE-RAS International Conference on Soft Robotics</span>, 2024.
+        <div class="links-row"><a href="shi2024robosoft.pdf">PDF</a><a href="https://doi.org/10.1109/ROBOSOFT60065.2024.10522026" target="_blank" rel="noopener">DOI</a></div></li>
+    </ol>
+
+    <p class="cvgroup" style="margin-top:24px">Presentations</p>
+    <ul class="bul">
+      <li>Lightning talk and poster, 7th IEEE-RAS International Conference on Soft Robotics, 2024</li>
+      <li>Poster, 13th Naval Academy Science and Engineering Conference, 2024</li>
+      <li>Posters, 22nd and 23rd Annual Kalman Research Symposium, 2022 and 2023</li>
+      <li>Posters, Bucknell Engineering Student Research Symposium, 2022 and 2023</li>
+    </ul>
+  </div>
+
+  <div class="section pad-b" style="padding-top:8px">
+    <div class="rule-h"><span class="n">Work experience</span><span class="line"></span></div>
+
+    <article class="cvitem">
+      <p class="cvhead"><strong>Engineer Intern</strong><span class="when">September 2021 – December 2021</span></p>
+      <p class="cvsub">Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences, Shenzhen, Guangdong, China · Supervisor: Ye Li, Ph.D.</p>
+      <ul class="bul">
+        <li>Worked at the Major Scientific and Technological Infrastructure for Synthetic Biology as a team member to develop an automatic growth medium coating machine</li>
+        <li>Developed the CAD models of the components, followed up the fabrication process and conducted quality control</li>
+        <li>Assembled the machine, examined its functionality and revised the design to achieve better performance</li>
+      </ul>
+    </article>
+
+    <article class="cvitem">
+      <p class="cvhead"><strong>Programmer Intern</strong><span class="when">February 2021 – May 2021</span></p>
+      <p class="cvsub">Xiamen Tumei Software Technology Co., Ltd, Xiamen, Fujian, China · Supervisor: Weixing Ji</p>
+      <ul class="bul">
+        <li>Worked as a team member to develop a smartphone application for an online television charging process</li>
+        <li>Used HTML to design the user interface of the app and collected user feedback to achieve a more user-friendly design</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="section pad-b" style="padding-top:8px">
+    <div class="rule-h"><span class="n">Teaching and leadership</span><span class="line"></span></div>
+
+    <article class="cvitem">
+      <p class="cvhead"><strong>Course Assistant, 24-351 Dynamics</strong><span class="when">August 2025 – present</span></p>
+      <p class="cvsub">Department of Mechanical Engineering, Carnegie Mellon University · Supervisor: Victoria Webster-Wood, Ph.D.</p>
+      <ul class="bul">
+        <li>Led weekly recitation sessions, working through particle and rigid-body dynamics problems with students</li>
+        <li>Held weekly office hours for individual questions on course content and homework</li>
+        <li>Graded homework and exams, and gave written feedback on solution methods</li>
+        <li>Authored and reviewed homework problems and their solutions</li>
+      </ul>
+    </article>
+
+    <article class="cvitem">
+      <p class="cvhead"><strong>Advanced Tutor, Study Group Leader, and New Staff Supervisor</strong><span class="when">August 2023 – May 2025</span></p>
+      <p class="cvsub">Teaching and Learning Center, Bucknell University · Supervisor: Katie Daly</p>
+      <ul class="bul">
+        <li>Facilitated a weekly calculus study group for 5–12 students to reinforce understanding of the class content by summarizing the notes and doing practice problems</li>
+        <li>Held one-on-one calculus tutoring sessions to answer students' questions about class content, homework, and exams</li>
+        <li>Supervised new staff at the Teaching and Learning Center, observed their study group or tutor sections and provided feedback</li>
+      </ul>
+    </article>
+
+    <article class="cvitem">
+      <p class="cvhead"><strong>Member, Alumni Relations Committee, Engineering Student Board</strong><span class="when">August 2023 – May 2025</span></p>
+      <p class="cvsub">College of Engineering, Bucknell University · Supervisor: Terri Norton, Ph.D.</p>
+      <ul class="bul">
+        <li>Served as a student voice to the College of Engineering leadership, the faculty, and the Bucknell Engineering Alumni Association</li>
+        <li>Planned and hosted "Happy Hour," an alumni connection event for students to communicate with alumni and hear about their experiences</li>
+        <li>Operated the Bucknell University College of Engineering LinkedIn Group</li>
+      </ul>
+    </article>
+
+    <article class="cvitem">
+      <p class="cvhead"><strong>Teaching Assistant, ENGR 100: Exploring Engineering</strong><span class="when">August 2022 – December 2022</span></p>
+      <p class="cvsub">College of Engineering, Bucknell University · Supervisor: Kelly Salyards, Ph.D.</p>
+      <ul class="bul">
+        <li>Provided guidance and insight to students during lab sections and held weekly office hours to help students with Arduino and other problems in their project development</li>
+        <li>Guided and helped students use engineering equipment such as 3D printers, laser cutters, and poster printers</li>
+      </ul>
+    </article>
+  </div>
+
+  <div class="section pad-b" style="padding-top:8px">
+    <div class="rule-h"><span class="n">Licensure and certifications</span><span class="line"></span></div>
+    <div class="row"><span class="when">March 2025</span>
+      <span><strong>Fundamentals of Engineering (FE) Exam, Mechanical</strong><br><span class="sub">NCEES</span></span></div>
+    <div class="row"><span class="when">January 2025</span>
+      <span><strong>Level 1 Certified Tutor</strong><br><span class="sub">College Reading and Learning Association (CRLA)</span></span></div>
+    <div class="row"><span class="when">April 2022</span>
+      <span><strong>Certified SolidWorks Associate (CSWA)</strong><br><span class="sub">Dassault Systèmes</span></span></div>
+  </div>
+
+  <div class="section pad-b" style="padding-top:8px">
+    <div class="rule-h"><span class="n">Technical skills</span><span class="line"></span></div>
+    <div class="row"><span class="when">Robotics</span>
+      <span><span class="sub">ROS · HEBI series-elastic actuator platforms · joint encoder, IMU and torque sensing · Arduino microcontrollers and servo control · hardware experiment design and data collection</span></span></div>
+    <div class="row"><span class="when">Programming</span>
+      <span><span class="sub">Python · MATLAB and Simulink · Linux · Git</span></span></div>
+    <div class="row"><span class="when">Simulation and analysis</span>
+      <span><span class="sub">PyBullet · ANSYS Mechanical · COMSOL · MATLAB symbolic computation</span></span></div>
+    <div class="row"><span class="when">Design and fabrication</span>
+      <span><span class="sub">SolidWorks · Fusion 360 · 3D printing · laser cutting · machine shop</span></span></div>
+  </div>
+</section>
+
+</main>
+<div id="lightbox" role="dialog" aria-label="Enlarged figure"><button class="lb-close" type="button">Close</button><img alt=""><video controls muted loop playsinline></video></div>
+
+<footer>
+  <div class="section">
+    <div>Hanlin (Harry) Shi · Pittsburgh, PA<br><a href="mailto:harryshi@andrew.cmu.edu">harryshi@andrew.cmu.edu</a></div>
+    <div>Last updated September 2026</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs = [].slice.call(document.querySelectorAll('#tabs a'));
+  var subs = [].slice.call(document.querySelectorAll('#subnav a'));
+  var names = tabs.map(function(t){ return t.getAttribute('data-tab'); });
+  var subNames = subs.map(function(s){ return s.getAttribute('data-sub'); });
+
+  function render(tab, sub){
+    if(names.indexOf(tab) === -1) tab = 'home';
+    if(subNames.indexOf(sub) === -1) sub = 'snake';
+    tabs.forEach(function(t){
+      if(t.getAttribute('data-tab') === tab) t.setAttribute('aria-current','page');
+      else t.removeAttribute('aria-current');
+    });
+    names.forEach(function(n){
+      document.getElementById('panel-' + n).classList.toggle('is-active', n === tab);
+    });
+    subs.forEach(function(s){
+      if(s.getAttribute('data-sub') === sub) s.setAttribute('aria-current','true');
+      else s.removeAttribute('aria-current');
+    });
+    subNames.forEach(function(n){
+      document.getElementById('sub-' + n).classList.toggle('is-active', n === sub);
+    });
+    document.title = 'Hanlin (Harry) Shi' + (tab === 'home' ? '' : ' — ' + tab);
+  }
+
+  function go(tab, sub){
+    var hash = '#' + tab + (tab === 'research' ? '/' + (sub || 'snake') : '');
+    if(location.hash !== hash) history.pushState(null, '', hash);
+    render(tab, sub || 'snake');
+    window.scrollTo(0, 0);
+  }
+
+  function fromHash(){
+    var parts = location.hash.replace('#','').split('/');
+    render(parts[0] || 'home', parts[1] || 'snake');
+  }
+
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(e){ e.preventDefault(); go(t.getAttribute('data-tab')); });
+  });
+  subs.forEach(function(s){
+    s.addEventListener('click', function(e){ e.preventDefault(); go('research', s.getAttribute('data-sub')); });
+  });
+  [].forEach.call(document.querySelectorAll('[data-tab-link]'), function(l){
+    l.addEventListener('click', function(e){
+      e.preventDefault();
+      go(l.getAttribute('data-tab-link'), l.getAttribute('data-sub-link'));
+    });
+  });
+  document.querySelector('.brand').addEventListener('click', function(e){ e.preventDefault(); go('home'); });
+
+
+  // click a figure or clip to see it full size
+  var lb = document.getElementById('lightbox'),
+      lbImg = lb.querySelector('img'), lbVid = lb.querySelector('video');
+  function closeLb(){ lb.classList.remove('on'); lbVid.pause(); lbVid.removeAttribute('src'); lbImg.removeAttribute('src'); }
+  document.addEventListener('click', function(e){
+    var f = e.target.closest && e.target.closest('.zoom[data-full]');
+    if(f){
+      var src = f.getAttribute('data-full');
+      if(/\.mp4($|\?)/.test(src)){
+        lbImg.style.display='none'; lbVid.style.display='';
+        lbVid.src = src; lb.classList.add('on'); var p = lbVid.play(); if(p && p.catch) p.catch(function(){});
+      } else {
+        lbVid.style.display='none'; lbImg.style.display='';
+        lbImg.src = src; lb.classList.add('on');
+      }
+      return;
+    }
+    if(lb.classList.contains('on') && !e.target.closest('#lightbox video')) closeLb();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLb(); });
+
+
+  // play a clip when it scrolls into view, pause it when it leaves
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce && 'IntersectionObserver' in window) {
+    var vo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        var v = e.target;
+        if (e.isIntersecting) { var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+        else if (!v.paused) { v.pause(); }
+      });
+    }, {threshold: 0.35});
+    var watched = new WeakSet();
+    function watchClips(){
+      Array.prototype.forEach.call(document.querySelectorAll('video.clip'), function(v){
+        if (watched.has(v)) return;
+        watched.add(v); vo.observe(v);
+      });
+    }
+    watchClips();
+    var _showFn = show;
+    show = function(tab, sub){ _showFn(tab, sub); requestAnimationFrame(watchClips); };
+  }
+
+  window.addEventListener('popstate', fromHash);
+  fromHash();
+
+  // keep the page light regardless of any theme the host or device tries to apply
+  document.documentElement.setAttribute('data-theme','light');
+})();
+</script>
+</body>
+</html>
