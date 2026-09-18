@@ -29,7 +29,8 @@ p{margin:0 0 16px; max-width:34em}
 :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
 
 /* ---------- top bar ---------- */
-.bar{position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 90%, transparent);
+.topbars{position:sticky; top:0; z-index:50; background:var(--paper)}
+.bar{background:color-mix(in srgb, var(--paper) 92%, transparent);
   backdrop-filter:blur(10px); border-bottom:1px solid var(--rule)}
 .bar-in{max-width:1180px; margin:0 auto; padding:0 26px; height:62px;
   display:flex; align-items:center; justify-content:space-between; gap:20px}
@@ -44,6 +45,7 @@ nav.tabs a[aria-current="page"]{color:#fff; background:var(--accent)}
 .panel,.subpanel{display:none}
 .panel.is-active,.subpanel.is-active{display:block}
 .section{max-width:1180px; margin:0 auto; padding:0 26px}
+html{scroll-padding-top:150px}
 .pad{padding-top:72px}
 .pad-b{padding-bottom:72px}
 
@@ -134,7 +136,8 @@ h2.head{font-family:"Newsreader",serif; font-weight:600; font-size:clamp(25px,3.
 .tile-b p.d{font-size:15.5px; color:var(--muted); margin:0; line-height:1.5}
 
 /* ---------- research sub-nav ---------- */
-.subnav{background:var(--band2); border-bottom:1px solid var(--rule); position:sticky; top:62px; z-index:40}
+.subnav{background:var(--band2); border-bottom:1px solid var(--rule); display:none}
+html[data-tab="research"] .subnav{display:block}
 .subnav-in{max-width:1180px; margin:0 auto; padding:0 26px; display:flex; gap:26px;
   overflow-x:auto; scrollbar-width:none}
 .subnav-in::-webkit-scrollbar{display:none}
@@ -211,7 +214,6 @@ footer a{color:var(--ink)}
 @media (max-width:640px){
   body{font-size:17px}
   .bar-in{height:auto; padding:12px 18px; flex-direction:column; align-items:flex-start; gap:8px}
-  .subnav{top:0; position:static}
   nav.tabs a{padding:6px 10px; font-size:14px}
   .section{padding:0 20px}
   .hero-in{padding:44px 20px 40px}
@@ -319,10 +321,30 @@ footer a{color:var(--ink)}
 #sub-caterpillar .contributions .cblock:first-of-type,
 #sub-centipede .contributions .cblock:first-of-type,
 #sub-aerial .contributions .cblock:first-of-type{padding-top:30px}
+
+@media (max-width:900px){
+  .problem-section .two{grid-template-columns:1fr; gap:28px; align-items:start}
+  .cblock, .cblock.text-only, .cblock.wide-media{grid-template-columns:1fr; gap:20px; padding-left:36px}
+  .cblock.text-only .chapter-copy, .cblock.wide-media .chapter-copy{grid-template-columns:1fr; gap:14px}
+  .media-row{grid-template-columns:1fr; grid-template-rows:none; row-gap:24px}
+  .media-row .cmedia{display:block}
+  .media-row .cmedia > *{grid-column:auto; grid-row:auto}
+  .about{display:block}
+  .about h2.head{margin-bottom:20px}
+}
+
+/* narrow screens: let the research tabs wrap onto several lines */
+@media (max-width:760px){
+  .subnav-in{flex-wrap:wrap; overflow-x:visible; gap:4px 18px; padding:4px 20px 0}
+  .subnav a{padding:9px 0 8px; font-size:13.5px}
+  .bar-in{gap:6px}
+  nav.tabs{gap:4px}
+}
 </style>
 </head>
 <body>
 
+<div class="topbars">
 <header class="bar">
   <div class="bar-in">
     <a class="brand" href="#home">Hanlin Shi <em>· Harry</em></a>
@@ -333,6 +355,15 @@ footer a{color:var(--ink)}
     </nav>
   </div>
 </header>
+  <div class="subnav">
+    <div class="subnav-in" id="subnav">
+      <a href="#research/snake" data-sub="snake">Snake robots in pipes</a>
+      <a href="#research/caterpillar" data-sub="caterpillar">Caterpillar robot</a>
+      <a href="#research/centipede" data-sub="centipede">Centipede robot</a>
+      <a href="#research/aerial" data-sub="aerial">Aerial robot simulation</a>
+    </div>
+  </div>
+</div>
 
 <main>
 
@@ -417,14 +448,6 @@ footer a{color:var(--ink)}
 
 <!-- ==================== RESEARCH ==================== -->
 <section class="panel" id="panel-research">
-  <div class="subnav">
-    <div class="subnav-in" id="subnav">
-      <a href="#research/snake" data-sub="snake">Snake robots in pipes</a>
-      <a href="#research/caterpillar" data-sub="caterpillar">Caterpillar robot</a>
-      <a href="#research/centipede" data-sub="centipede">Centipede robot</a>
-      <a href="#research/aerial" data-sub="aerial">Aerial robot simulation</a>
-    </div>
-  </div>
 
   <!-- ---------- snake ---------- -->
   <div class="subpanel is-active" id="sub-snake">
@@ -785,6 +808,7 @@ footer a{color:var(--ink)}
     subNames.forEach(function(n){
       document.getElementById('sub-' + n).classList.toggle('is-active', n === sub);
     });
+    document.documentElement.setAttribute('data-tab', tab);
     document.title = 'Hanlin (Harry) Shi' + (tab === 'home' ? '' : ' — ' + tab);
   }
 
@@ -858,6 +882,7 @@ footer a{color:var(--ink)}
     var _showFn = show;
     show = function(tab, sub){ _showFn(tab, sub); requestAnimationFrame(watchClips); };
   }
+
 
   window.addEventListener('popstate', fromHash);
   fromHash();
