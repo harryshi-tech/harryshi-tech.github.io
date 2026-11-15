@@ -29,8 +29,7 @@ p{margin:0 0 16px; max-width:34em}
 :focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:2px}
 
 /* ---------- top bar ---------- */
-.topbars{position:sticky; top:0; z-index:50; background:var(--paper)}
-.bar{background:color-mix(in srgb, var(--paper) 92%, transparent);
+.bar{position:sticky; top:0; z-index:50; background:color-mix(in srgb, var(--paper) 90%, transparent);
   backdrop-filter:blur(10px); border-bottom:1px solid var(--rule)}
 .bar-in{max-width:1180px; margin:0 auto; padding:0 26px; height:62px;
   display:flex; align-items:center; justify-content:space-between; gap:20px}
@@ -45,7 +44,6 @@ nav.tabs a[aria-current="page"]{color:#fff; background:var(--accent)}
 .panel,.subpanel{display:none}
 .panel.is-active,.subpanel.is-active{display:block}
 .section{max-width:1180px; margin:0 auto; padding:0 26px}
-html{scroll-padding-top:150px}
 .pad{padding-top:72px}
 .pad-b{padding-bottom:72px}
 
@@ -136,8 +134,7 @@ h2.head{font-family:"Newsreader",serif; font-weight:600; font-size:clamp(25px,3.
 .tile-b p.d{font-size:15.5px; color:var(--muted); margin:0; line-height:1.5}
 
 /* ---------- research sub-nav ---------- */
-.subnav{background:var(--band2); border-bottom:1px solid var(--rule); display:none}
-html[data-tab="research"] .subnav{display:block}
+.subnav{background:var(--band2); border-bottom:1px solid var(--rule); position:sticky; top:62px; z-index:40}
 .subnav-in{max-width:1180px; margin:0 auto; padding:0 26px; display:flex; gap:26px;
   overflow-x:auto; scrollbar-width:none}
 .subnav-in::-webkit-scrollbar{display:none}
@@ -214,6 +211,7 @@ footer a{color:var(--ink)}
 @media (max-width:640px){
   body{font-size:17px}
   .bar-in{height:auto; padding:12px 18px; flex-direction:column; align-items:flex-start; gap:8px}
+  .subnav{top:0; position:static}
   nav.tabs a{padding:6px 10px; font-size:14px}
   .section{padding:0 20px}
   .hero-in{padding:44px 20px 40px}
@@ -321,30 +319,10 @@ footer a{color:var(--ink)}
 #sub-caterpillar .contributions .cblock:first-of-type,
 #sub-centipede .contributions .cblock:first-of-type,
 #sub-aerial .contributions .cblock:first-of-type{padding-top:30px}
-
-@media (max-width:900px){
-  .problem-section .two{grid-template-columns:1fr; gap:28px; align-items:start}
-  .cblock, .cblock.text-only, .cblock.wide-media{grid-template-columns:1fr; gap:20px; padding-left:36px}
-  .cblock.text-only .chapter-copy, .cblock.wide-media .chapter-copy{grid-template-columns:1fr; gap:14px}
-  .media-row{grid-template-columns:1fr; grid-template-rows:none; row-gap:24px}
-  .media-row .cmedia{display:block}
-  .media-row .cmedia > *{grid-column:auto; grid-row:auto}
-  .about{display:block}
-  .about h2.head{margin-bottom:20px}
-}
-
-/* narrow screens: let the research tabs wrap onto several lines */
-@media (max-width:760px){
-  .subnav-in{flex-wrap:wrap; overflow-x:visible; gap:4px 18px; padding:4px 20px 0}
-  .subnav a{padding:9px 0 8px; font-size:13.5px}
-  .bar-in{gap:6px}
-  nav.tabs{gap:4px}
-}
 </style>
 </head>
 <body>
 
-<div class="topbars">
 <header class="bar">
   <div class="bar-in">
     <a class="brand" href="#home">Hanlin Shi <em>· Harry</em></a>
@@ -355,15 +333,6 @@ footer a{color:var(--ink)}
     </nav>
   </div>
 </header>
-  <div class="subnav">
-    <div class="subnav-in" id="subnav">
-      <a href="#research/snake" data-sub="snake">Snake robots in pipes</a>
-      <a href="#research/caterpillar" data-sub="caterpillar">Caterpillar robot</a>
-      <a href="#research/centipede" data-sub="centipede">Centipede robot</a>
-      <a href="#research/aerial" data-sub="aerial">Aerial robot simulation</a>
-    </div>
-  </div>
-</div>
 
 <main>
 
@@ -401,8 +370,8 @@ footer a{color:var(--ink)}
     <div class="about">
       <h2 class="head">About me</h2>
         <p>I'm a master's student in Mechanical Engineering at Carnegie Mellon University, working in the Biorobotics Lab with Prof. Howie Choset. I grew up curious about how animals move, and I've been asking what happens when you give a robot a body that behaves more like theirs: flexible, many-jointed, and in constant contact with its surroundings. Bodies like that are hard to design, model, and control — and they can reach places other robots can't. That's what I find interesting.</p>
-        <p>That curiosity first took concrete form at Bucknell University, where I worked on soft crawling robots inspired by caterpillars and centipedes, designing the mechanisms and gaits that make them move. A summer at MIT simulating flapping wings for a micro-aerial robot pushed me further into robot modeling and control. At CMU, my work adds another layer: a snake robot navigating the outside of a complex pipe network has to figure out how to move robustly across varying pipe geometries, while keeping track of where it is from what its own body senses. These experiences have grounded me in the full path from mechanism to control to state estimation, and made me want to keep working on robots that learn from the many ways animals move to navigate unstructured environments.</p>
-      <p>I'm hoping to continue this in a PhD, working on these questions in depth — building robots that move in ways we haven't built before, so they can operate where nothing else can.</p>
+        <p>That curiosity first took concrete form at Bucknell University, where I worked on soft crawling robots inspired by caterpillars and centipedes, designing the mechanisms and gaits that make them move. A summer at MIT simulating flapping wings for a micro-aerial robot pushed me further into robot modeling and control. At CMU, my work adds another layer: a snake robot navigating the outside of a complex pipe network has to figure out how to move robustly across varying pipe geometries, while keeping track of where it is from what its own body senses. These experiences took me through mechanism design, modeling, and control, showed me that the three depend on one another, and made me want to keep working on robots that learn from the many ways animals move to navigate unstructured environments.</p>
+      <p>What draws me to a PhD is a question I haven't been able to put down since my first caterpillar robot stalled at a step: how can a robot adapt to its surroundings as effectively as an animal does? Each project so far has answered part of that question and opened a harder one. I want to spend the next several years pursuing it in depth, <span style="white-space:nowrap">co-designing</span> bio-inspired mechanisms, models, and controllers so that robots use physical interaction for both locomotion and sensing, and can navigate unstructured, confined spaces that are unsafe or hard for people to reach.</p>
     </div>
   </div>
 
@@ -414,7 +383,7 @@ footer a{color:var(--ink)}
         <div class="tile-b">
           <p class="tile-w">Biorobotics Lab, CMU · 2025–present</p>
           <p class="tile-t">Autonomous external pipe navigation for snake robots</p>
-          <p class="d">Toward inspecting complex pipe networks beyond an operator's line of sight. Snake robots climb the outside of the pipes, adapt their grip as the diameter changes, cross junctions between branches, and keep track of where they are from onboard sensing.</p>
+          <p class="d">Snake robots that climb the outside of industrial pipe networks, toward inspection beyond an operator's line of sight. I develop the control and state estimation that let the robot regulate its grip, cross junctions, and sense the pipe through its own body.</p>
         </div>
       </a>
       <a class="tile" href="#research/caterpillar" data-tab-link="research" data-sub-link="caterpillar">
@@ -422,7 +391,7 @@ footer a{color:var(--ink)}
         <div class="tile-b">
           <p class="tile-w">Soft Robotics Lab, Bucknell · 2022–2024</p>
           <p class="tile-t">Caterpillar-inspired soft robot</p>
-          <p class="d">Mechanism and gait design for a modular, 3D-printed crawler with tendon-driven bending segments and steering.</p>
+          <p class="d">A 3D-printed, tendon-driven crawler whose arched segments lift its feet instead of dragging them. I designed its mechanism, gaits, and steering.</p>
         </div>
       </a>
       <a class="tile" href="#research/centipede" data-tab-link="research" data-sub-link="centipede">
@@ -430,7 +399,7 @@ footer a{color:var(--ink)}
         <div class="tile-b">
           <p class="tile-w">Soft Robotics Lab, Bucknell · 2023–2025</p>
           <p class="tile-t">Centipede-inspired soft robot</p>
-          <p class="d">Mechanism and control design for a modular soft crawler whose segments couple body bending with leg lift.</p>
+          <p class="d">A modular crawler whose segments couple body bending with leg lift, so one servo drives each segment. I designed its mechanism and gait control.</p>
         </div>
       </a>
       <a class="tile" href="#research/aerial" data-tab-link="research" data-sub-link="aerial">
@@ -438,7 +407,7 @@ footer a{color:var(--ink)}
         <div class="tile-b">
           <p class="tile-w">Soft and Micro Robotics Lab, MIT · summer 2024</p>
           <p class="tile-t">Sub-gram aerial robot simulation</p>
-          <p class="d">Simulation of flapping-wing kinematics and the aerodynamic forces generated by a soft-actuated micro aerial vehicle.</p>
+          <p class="d">A simulation of an insect-scale robot's flapping wing, whose pitch arises passively under aerodynamic load. I built the MATLAB model that predicts its motion and forces.</p>
         </div>
       </a>
     </div>
@@ -448,6 +417,14 @@ footer a{color:var(--ink)}
 
 <!-- ==================== RESEARCH ==================== -->
 <section class="panel" id="panel-research">
+  <div class="subnav">
+    <div class="subnav-in" id="subnav">
+      <a href="#research/snake" data-sub="snake">Snake robots in pipes</a>
+      <a href="#research/caterpillar" data-sub="caterpillar">Caterpillar robot</a>
+      <a href="#research/centipede" data-sub="centipede">Centipede robot</a>
+      <a href="#research/aerial" data-sub="aerial">Aerial robot simulation</a>
+    </div>
+  </div>
 
   <!-- ---------- snake ---------- -->
   <div class="subpanel is-active" id="sub-snake">
@@ -465,8 +442,8 @@ footer a{color:var(--ink)}
           <h2 class="head">The problem</h2>
           <p>Intricate pipe networks are essential across many industries, such as chemical processing plants, power generation facilities, and municipal water distribution pipelines, but their complex geometries make inspection and maintenance difficult and unsafe for humans. Snake robots are well-suited for these environments because their hyper-redundant bodies can conform to tight, irregular pipe structures.</p>
           <p>Our lab previously developed a set of kinematic gaits to navigate the exterior of pipes and negotiate various geometries: a rolling helix for climbing straight pipes, a windowed variant that reaches across a perpendicular T-junction, and a spiraling gait that rotates the robot around the pipe to pass obstructions.</p>
-          <p>However, the current system executes these gaits open-loop. Without contact feedback, the robot must grip conservatively to avoid slipping, which loads the joint actuators heavily and limits gait speed. The windowed rolling helix, which lets the head reach onto a new branch while the tail keeps its grip, also depends on knowing when the robot is approaching a junction and how it is oriented relative to that junction, and at present the operator supplies both by visual inspection, which fails as soon as the pipe run leaves line of sight.</p>
-          <p>The objective of this project is to close both loops onboard: to regulate contact from the robot's own torque sensing, and to infer the surrounding geometry from its own proprioception.</p>
+          <p>However, the current system executes these gaits open-loop. Without contact feedback, the robot must grip conservatively to avoid slipping, which loads the joint actuators heavily and limits gait speed. The windowed rolling helix, which lets the head reach onto a new branch while the tail keeps its grip, also depends on knowing when the robot is approaching a junction and how it is oriented relative to that junction. At present, the operator supplies both by visual inspection, which fails as soon as the pipe run leaves line of sight.</p>
+          <p>The objective of this project is to close both loops onboard: to regulate contact from the robot's own torque sensing, and to infer the surrounding geometry from its own proprioception, so that the same actuators that move the robot also sense its surroundings.</p>
         </div>
         <div><img data-full="media/snake-helix.jpg" class="fig zoom" src="media/snake-helix.jpg" alt="Snake robot wrapped helically around a pipe" loading="lazy"><p class="caption">Snake robot climbs by wrapping around the pipe in a rolling helix. <span class="zoomhint">Click to enlarge.</span></p></div>
       </div>
@@ -478,7 +455,7 @@ footer a{color:var(--ink)}
       <article class="cblock center-media">
         <div class="chapter-copy">
         <h3 class="proj">Compliant control: deviation-driven shape-based compliance (DSBC) controller</h3>
-        <p>Standard shape-based compliance cannot distinguish the contact load from the steady load required to hold the robot on the pipe, and consequently relaxes its grip under gravitational loading alone. I developed the DSBC controller to resolve this: it filters the measured joint torque against a reference, treats only the deviation as contact, and modulates the commanded joint angles to tighten or loosen the wrap in response. Removing the need to over-grip reduced traversal times by roughly half across straight pipes, obstacles and junctions, and lowered joint actuation effort throughout. It also allows the robot to adapt to changes in pipe diameter autonomously, without any change of command from the operator.</p>
+        <p>Standard shape-based compliance cannot distinguish the contact load from the steady load required to hold the robot on the pipe, and consequently relaxes its grip under gravitational loading alone, causing the robot to fall. I developed the DSBC controller to resolve this: it filters the measured joint torque against a reference, treats only the deviation as contact, and modulates the commanded joint angles to tighten or loosen the wrap in response. Removing the need to over-grip reduced hardware traversal times by up to 49% compared with open-loop control across straight pipes, obstacles and junctions, and lowered joint actuation effort in simulation. It also allows the robot to adapt to changes in pipe diameter autonomously, without any change of command from the operator.</p>
         </div>
         <div class="cmedia"><img class="fig zoom" data-full="media/dsbc-full.jpg" src="media/dsbc-diagram.jpg" alt="Block diagram of the deviation-driven shape-based compliance controller" loading="lazy"><p class="caption">DSBC controller block diagram. <span class="zoomhint">Click to enlarge.</span></p></div>
       </article>
@@ -500,14 +477,14 @@ footer a{color:var(--ink)}
       <article class="cblock">
         <div class="chapter-copy">
         <h3 class="proj">Pipe profile reconstruction: gait-based odometry</h3>
-        <p>Tracking displacement along the pipe from the gait's own cycles turns those per-instant estimates into a map. Each rolling-helix cycle advances the robot by a known amount along the pipe axis, so integrating over cycles gives distance travelled without any external reference. Combined with the estimated axis direction and radius at each point, this reconstructs the geometry the robot has passed through, including changes in inclination and diameter between segments.</p>
+        <p>Tracking displacement along the pipe from the gait's own cycles turns those per-instant estimates into a map. Each rolling-helix cycle advances the robot by a known amount along the pipe axis, so integrating over cycles gives distance traveled without any external reference. Combined with the estimated axis direction and radius at each point, this reconstructs the geometry the robot has passed through, including changes in inclination and diameter between segments.</p>
         </div>
         <div class="cmedia"><video class="clip" muted loop playsinline controls preload="metadata" poster="media/snake-rolling-poster.jpg"><source src="media/snake-rolling.mp4" type="video/mp4"></video><p class="caption">Live pipe profile reconstruction from tilt and diameter estimations.</p></div>
       </article>
       <article class="cblock">
         <div class="chapter-copy">
-        <h3 class="proj">Junction detection: contact force from joint torque</h3>
-        <p>Autonomous junction traversal requires the robot to detect a junction and determine its orientation relative to it. I am developing a model that estimates contact force from joint torque. Contact is decomposed into two components: a radial force, which reflects how tightly the robot is gripping the pipe, and an axial force along the pipe, which indicates the presence of a junction. Localizing where along the body that force acts identifies which modules are in contact with the junction — the information the windowed rolling helix needs to initiate a transition. The model is verified by applying known axial loads, with a real-time visualization showing the average gripping force alongside the applied external force and its location.</p>
+        <h3 class="proj">Junction detection: torque-based and shape-based detectors</h3>
+        <p>Autonomous junction traversal requires the robot to detect a junction and determine its orientation relative to it. I am developing a model that estimates contact force from joint torque. Contact is decomposed into two components: a radial force, which reflects how tightly the robot is gripping the pipe, and an axial force along the pipe, which indicates the presence of a junction. Localizing where along the body that force acts identifies which modules are in contact with the junction — the information the windowed rolling helix needs to initiate a transition. The model is tested by applying known axial loads, with a real-time visualization showing the average gripping force alongside the applied external force and its location. In parallel, I am developing a shape-based detector that identifies a junction from changes in each link's distance to the estimated pipe axis. Both detectors are still in development.</p>
         </div>
         <div class="cmedia"><video class="clip" muted loop playsinline controls preload="metadata" poster="media/snake-contact-poster.jpg"><source src="media/snake-contact.mp4" type="video/mp4"></video><p class="caption">Known axial loads applied to the robot, with the estimated gripping force and the applied external force visualized in real time.</p></div>
       </article>
@@ -524,7 +501,7 @@ footer a{color:var(--ink)}
       <video class="clip" style="margin-top:22px" muted loop playsinline preload="metadata" poster="media/caterpillar-locomotion-poster.jpg"><source src="media/caterpillar-locomotion.mp4" type="video/mp4"></video>
       <p class="caption">Locomotion and steering of the caterpillar-inspired soft robot.</p>
 
-      <p style="margin-top:36px; max-width:52em">Soft crawling robots can reach spaces rigid robots cannot, but their compliance makes them difficult to model and control. Most tendon-driven caterpillar robots advance by sliding their feet along the ground, which limits traction and makes steering impractical. Lifting the feet clear of the ground instead requires both a body whose segments can bend sufficiently in either direction and a gait that coordinates them. The objective of this project was to design a tendon-driven crawling robot capable of lifting its feet, together with the gaits that produce that motion, and to extend the design with steering.</p>
+      <p style="margin-top:36px; max-width:52em">Soft crawling robots can reach spaces rigid robots cannot, but their compliance makes them difficult to model and control. Most tendon-driven caterpillar robots advance by sliding their feet along the ground, which loses energy to friction, limits traction, and makes steering impractical. Lifting the feet clear of the ground instead requires both a body whose segments can bend sufficiently in either direction and a gait that coordinates them. The objective of this project was to design a tendon-driven crawling robot capable of lifting its feet, together with the gaits that produce that motion, and to extend the design with steering.</p>
     </div>
 
     <div class="section pad-b contributions">
@@ -534,7 +511,7 @@ footer a{color:var(--ink)}
         <div class="chapter-copy">
         <h3 class="proj">Hardware design</h3>
         <p>The robot is built from an alternating chain of flexible bending segments and rigid hubs, so it can be assembled with any number of segments. Each segment is 3D printed in FilaFlex, a thermoplastic elastomer, and acts as a spring: a tendon routed through guide tubes along its centerline is wound by a motor in the adjacent hub, bending the segment against its own elasticity. Prolegs printed in the same material support the body and provide friction at the ground.</p>
-        <p>The design difference that matters is the angle at which segments meet the hubs. Earlier tendon-driven caterpillar robots connect them flat, so the prolegs are parallel when the segments are straight. Connecting them at 45° places the neutral stance at the midpoint of each segment's range rather than at one end, leaving enough range of motion in both directions for neighbouring segments to coordinate and lift a foot clear of the ground.</p>
+        <p>The design difference that matters is the angle at which segments meet the hubs. Earlier tendon-driven caterpillar robots connect them flat, so the prolegs are parallel when the segments are straight. Connecting them at 45° makes each segment a pre-stressed arch, placing the neutral stance at the midpoint of its range rather than at one end and leaving enough range of motion in both directions for neighboring segments to coordinate and lift a foot clear of the ground.</p>
         </div>
         <div class="cmedia"><img data-full="media/caterpillar-hardware.jpg" class="fig zoom" src="media/caterpillar-hardware.jpg" alt="CAD render of the caterpillar robot labelling motor, hub, flexible segment, tube, string and pulley" loading="lazy"><p class="caption">Modular hardware: flexible tendon-driven segments alternating with rigid hubs. <span class="zoomhint">Click to enlarge.</span></p></div>
       </article>
@@ -542,7 +519,7 @@ footer a{color:var(--ink)}
       <article class="cblock wide-media">
         <div class="chapter-copy">
         <h3 class="proj">Kinematic model and gait design</h3>
-        <p>We modelled the robot as a planar quasi-static system in which each flexible segment bends into a circular arc, so its configuration reduces to a few shape variables and a gait becomes a periodic trajectory through that space. Designing gaits this way produced crawling that lifts the feet clear of the ground rather than relying on sliding, and displacement per cycle grows with both segment count and amplitude.</p>
+        <p>We modeled the robot as a planar quasi-static system in which each flexible segment bends into a circular arc, so its configuration reduces to a few shape variables and a gait becomes a periodic trajectory through that space. Designing gaits this way produced crawling that lifts the feet clear of the ground rather than relying on sliding, and displacement per cycle grows with both segment count and amplitude.</p>
         </div>
         <div class="media-row"><div class="cmedia"><img data-full="media/caterpillar-model.jpg" class="fig zoom" src="media/caterpillar-model.jpg" alt="Geometry of the caterpillar model showing hub poses, segment length, bending angle and connection angle" loading="lazy"><p class="caption">Model geometry: hub poses follow from the segment bending angles. <span class="zoomhint">Click to enlarge.</span></p></div><div class="cmedia"><img data-full="media/caterpillar-snapshots.jpg" class="fig zoom" src="media/caterpillar-snapshots.jpg" alt="Simulated and experimental snapshots of the three-segment robot through one stance interval" loading="lazy"><p class="caption">Simulated (left) and experimental (right) snapshots through one stance interval. <span class="zoomhint">Click to enlarge.</span></p></div></div>
       </article>
@@ -569,7 +546,7 @@ footer a{color:var(--ink)}
       <video class="clip" style="margin-top:22px" muted loop playsinline preload="metadata" poster="media/centipede-crawl-poster.jpg"><source src="media/centipede-crawl.mp4" type="video/mp4"></video>
       <p class="caption">The centipede-inspired robot crawling on a bench.</p>
 
-      <p style="margin-top:36px; max-width:52em">Centipedes combine a travelling wave along the body with the lifting of successive leg pairs. Reproducing that in a robot typically requires separate actuators for body bending and leg motion, so the actuation and control burden grows with body length. The objective of this project was to realize that coupling mechanically, such that a single actuator per segment produces both body bending and leg lift.</p>
+      <p style="margin-top:36px; max-width:52em">Centipedes combine a traveling wave along the body with the lifting of successive leg pairs. Reproducing that in a robot typically requires separate actuators for body bending and leg motion, so the actuation and control burden grows with body length. The objective of this project was to realize that coupling mechanically, such that a single actuator per segment produces both body bending and leg lift.</p>
     </div>
 
     <div class="section pad-b contributions">
@@ -578,7 +555,7 @@ footer a{color:var(--ink)}
       <article class="cblock text-only">
         <div class="chapter-copy">
         <h3 class="proj">A segment that couples body bending and leg lift</h3>
-        <p>Centipedes coordinate a wave along the body with the lifting of each pair of legs. I designed a modular segment that reproduces that coupling mechanically: one servo per segment drives a pair of flexible links, which bend the body and raise the legs together, so the coupled motion comes from the mechanism rather than from coordinating separate actuators.</p>
+        <p>To reproduce the centipede's coupling, I designed a modular segment in which one servo bends the body sideways, and flexible links coupling the legs to the body lift the legs on one side and lower them on the other. The coupled motion therefore comes from the mechanism rather than from coordinating separate actuators.</p>
       
         </div>
       </article>
@@ -612,7 +589,7 @@ footer a{color:var(--ink)}
       <article class="cblock">
         <div class="chapter-copy">
         <h3 class="proj">Wing motion model</h3>
-        <p>A flapping wing is driven at its root but twists passively under aerodynamic load, so its orientation at any instant is not commanded directly. I built a MATLAB model that predicts the wing's position through the stroke from the active stroke motion and the passive pitching that results, giving the state of any point on the wing at each timestep.</p>
+        <p>Because the wing's pitch depends on the same aerodynamic loads it produces, stroke and pitch cannot be computed separately. I built a MATLAB model that couples the active stroke with the passive pitch to predict the wing's position through the stroke, giving the state of any point on the wing at each timestep.</p>
         </div>
         <div class="cmedia"><video class="clip zoom" data-full="media/aerial-wing.mp4" style="margin-top:22px; max-width:620px" muted loop playsinline preload="metadata" poster="media/aerial-wing-poster.jpg"><source src="media/aerial-wing.mp4" type="video/mp4"></video><p class="caption">Simulated wing chord through one stroke, with the leading edge marked in red. <span class="zoomhint">Click to enlarge.</span></p></div>
       </article>
@@ -620,7 +597,7 @@ footer a{color:var(--ink)}
       <article class="cblock text-only">
         <div class="chapter-copy">
         <h3 class="proj">Aerodynamic force prediction</h3>
-        <p>From that motion, the model predicts the aerodynamic forces the wing generates over a stroke — the quantity that sets how much lift the soft actuator driving the wing has to produce.</p>
+        <p>From that motion, the model predicts the aerodynamic forces the wing generates over a stroke, and from those forces, the actuation the soft actuator must supply for the wing to produce the required lift.</p>
       
         </div>
       </article>
@@ -642,10 +619,10 @@ footer a{color:var(--ink)}
     <div class="rule-h"><span class="n">Education</span><span class="line"></span></div>
     <div class="row"><span class="when">Expected May 2027</span>
       <span><strong>Carnegie Mellon University</strong>, Pittsburgh, PA<br>
-      <span class="sub">Master of Science in Mechanical Engineering · Cumulative GPA 4.0/4.0</span></span></div>
+      <span class="sub">Master of Science in Mechanical Engineering · Cumulative GPA 4.0/4.0<br>Relevant coursework: Robot Dynamics and Analysis · Modern Control Theory · Optimal Control and Reinforcement Learning · Advanced Control System Integration · Applied FEA</span></span></div>
     <div class="row"><span class="when">May 2025</span>
       <span><strong>Bucknell University</strong>, Lewisburg, PA<br>
-      <span class="sub">Bachelor of Science in Mechanical Engineering, summa cum laude · Minor in Mathematics<br>Cumulative GPA 3.94/4.0</span></span></div>
+      <span class="sub">Bachelor of Science in Mechanical Engineering · Minor in Mathematics<br>Cumulative GPA 3.94/4.0</span></span></div>
   </div>
 
   <div class="section pad-b" style="padding-top:8px">
@@ -656,7 +633,7 @@ footer a{color:var(--ink)}
     <div class="row"><span class="when">November 2023</span>
       <span><strong>Member, Pennsylvania Eta Chapter of Tau Beta Pi Honor Society</strong><br>
       <span class="sub">A national engineering honor society founded in 1885 to recognize outstanding students who display both distinguished scholarship in technical fields and exemplary character</span></span></div>
-    <div class="row"><span class="when">Each semester</span>
+    <div class="row"><span class="when">Each completed semester</span>
       <span><strong>Dean's List</strong>, Bucknell University<br>
       <span class="sub">Awarded to each student who achieves a 3.50 or higher GPA for the semester</span></span></div>
   </div>
@@ -666,7 +643,7 @@ footer a{color:var(--ink)}
 
     <p class="cvgroup">Journal papers</p>
     <ol class="pubs">
-      <li><strong>H. Shi</strong>, J. Kallarackal, K. Karumanchi, S. Pellegrini, A. Orekhov, A. Vu, B. Vundurthy and H. Choset, "A unified compliant locomotion framework for snake robot navigation in complex external pipe networks," <span class="venue">IEEE Transactions on Automation Science and Engineering</span>, under review, 2026.</li>
+      <li><strong>H. Shi</strong>, J. Kallarackal, K. Karumanchi, S. Pellegrini, A. Orekhov, A. Vu, B. Vundurthy and H. Choset, "A unified compliant locomotion framework for snake robot navigation in complex external pipe networks," <span class="venue">IEEE Transactions on Automation Science and Engineering</span>, revision under review, 2026.</li>
     </ol>
 
     <p class="cvgroup" style="margin-top:24px">Conference papers</p>
@@ -711,13 +688,24 @@ footer a{color:var(--ink)}
     <div class="rule-h"><span class="n">Teaching and leadership</span><span class="line"></span></div>
 
     <article class="cvitem">
-      <p class="cvhead"><strong>Course Assistant, 24-351 Dynamics</strong><span class="when">August 2025 – present</span></p>
+      <p class="cvhead"><strong>Research Mentor, Biorobotics Lab</strong><span class="when">August 2026 – present</span></p>
+      <p class="cvsub">Robotics Institute, Carnegie Mellon University</p>
+      <ul class="bul">
+        <li>Mentor undergraduate researchers on the snake robot project</li>
+        <li>Guide their onboarding through starter projects and foundational gait literature</li>
+        <li>Support setup of the lab's snake robot software</li>
+        <li>Review their progress at weekly project meetings</li>
+      </ul>
+    </article>
+
+    <article class="cvitem">
+      <p class="cvhead"><strong>Course Assistant, 24-351 Dynamics</strong><span class="when">August 2026 – present</span></p>
       <p class="cvsub">Department of Mechanical Engineering, Carnegie Mellon University · Supervisor: Victoria Webster-Wood, Ph.D.</p>
       <ul class="bul">
-        <li>Led weekly recitation sessions, working through particle and rigid-body dynamics problems with students</li>
-        <li>Held weekly office hours for individual questions on course content and homework</li>
-        <li>Graded homework and exams, and gave written feedback on solution methods</li>
-        <li>Authored and reviewed homework problems and their solutions</li>
+        <li>Lead weekly recitation sessions, working through particle and rigid-body dynamics problems with students</li>
+        <li>Hold weekly office hours for individual questions on course content and homework</li>
+        <li>Grade homework and exams, and give written feedback on solution methods</li>
+        <li>Author and review homework problems and their solutions</li>
       </ul>
     </article>
 
@@ -780,7 +768,7 @@ footer a{color:var(--ink)}
 <footer>
   <div class="section">
     <div>Hanlin (Harry) Shi · Pittsburgh, PA<br><a href="mailto:harryshi@andrew.cmu.edu">harryshi@andrew.cmu.edu</a></div>
-    <div>Last updated September 2026</div>
+    <div>Last updated November 2026</div>
   </div>
 </footer>
 
@@ -808,7 +796,6 @@ footer a{color:var(--ink)}
     subNames.forEach(function(n){
       document.getElementById('sub-' + n).classList.toggle('is-active', n === sub);
     });
-    document.documentElement.setAttribute('data-tab', tab);
     document.title = 'Hanlin (Harry) Shi' + (tab === 'home' ? '' : ' — ' + tab);
   }
 
@@ -879,10 +866,7 @@ footer a{color:var(--ink)}
       });
     }
     watchClips();
-    var _showFn = show;
-    show = function(tab, sub){ _showFn(tab, sub); requestAnimationFrame(watchClips); };
   }
-
 
   window.addEventListener('popstate', fromHash);
   fromHash();
